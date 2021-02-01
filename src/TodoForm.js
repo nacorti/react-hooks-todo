@@ -3,22 +3,34 @@ import TextField from '@material-ui/core/TextField';
 import useInputState from './useInputState';
 
 const TodoForm = ({ saveTodo }) => {
-    const { value, reset, onChange } = useInputState('');
+    const { name, description, reset, onNameChange, onDescriptionChange } = useInputState('');
     return (
         <form
             onSubmit={(event) => {
+                console.log('submit!');
                 event.preventDefault();
-                saveTodo(value);
+                saveTodo({ name, description });
                 reset();
             }}
         >
-            <TextField
-                variant="outlined" 
-                placeholder="Add Todo" 
-                margin="normal"
-                onChange={onChange}
-                value={value}
-            />
+            <div>
+                <TextField
+                    variant="outlined" 
+                    placeholder="Add Todo" 
+                    margin="normal"
+                    onChange={onNameChange}
+                    value={name}
+                />
+                <TextField
+                    variant="outlined" 
+                    placeholder="Add Description" 
+                    margin="normal"
+                    onChange={onDescriptionChange}
+                    value={description}
+                />
+            </div>
+            <button>Create Todo</button>
+            
         </form>
     );
 };
